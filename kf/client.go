@@ -212,7 +212,7 @@ var refreshAccessTokenLock sync.Mutex
 
 如果没有 access_token 或者 已过期，那么刷新
 */
-func GetAccessToken(app *App) (accessToken string, err error) {
+func GetAccessToken(app *KfApp) (accessToken string, err error) {
 	cacheKey := app.Config.AgentId + app.Config.Secret // 企业微信-系统应用没有 agentid ，所以需要secret 辅助
 	accessToken, err = app.AccessToken.Cache.Fetch(cacheKey)
 	if accessToken != "" {
@@ -247,7 +247,7 @@ NoticeAccessTokenExpire 只需将本地存储的 access_token 删除，即完成
 
 retry 请求的时候，会发现本地没有 access_token ，从而触发refresh
 */
-func NoticeAccessTokenExpire(app *App) (err error) {
+func NoticeAccessTokenExpire(app *KfApp) (err error) {
 	if app.Corporation.Logger != nil {
 		app.Corporation.Logger.Println("NoticeAccessTokenExpire")
 	}
