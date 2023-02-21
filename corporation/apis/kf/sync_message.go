@@ -3,15 +3,15 @@ package kf
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/fastwego/wxwork/corporation"
 	"github.com/fastwego/wxwork/corporation/type/type_message"
+	"github.com/fastwego/wxwork/kf"
 )
 
 const (
 	apiKfSyncMessage = "/cgi-bin/kf/sync_msg"
 )
 
-func SyncMessage(ctx *corporation.App, payload []byte) (*type_message.SyncMsgSchema, error) {
+func SyncMessage(ctx *kf.KfApp, payload []byte) (*type_message.SyncMsgSchema, error) {
 	data, err := ctx.Client.HTTPPost(apiKfSyncMessage, bytes.NewReader(payload), "application/json;charset=utf-8")
 	if err != nil {
 		return nil, err
