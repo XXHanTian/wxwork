@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	apiKfSendMessageOnEvent = "/cgi-bin/kf/send_msg"
+	apiKfSendMessageOnEvent = "/cgi-bin/kf/send_msg_on_event"
 )
 
 func SendMessageOnEvent(ctx *kf.KfApp, payload []byte) ([]byte, error) {
