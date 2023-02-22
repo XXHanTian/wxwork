@@ -1,4 +1,4 @@
-package type_message
+package type_kf
 
 import "encoding/json"
 
@@ -136,7 +136,9 @@ type EventMessage struct {
 	BaseMessage
 	MsgType string `json:"msgtype"` // 消息类型，此时固定为：event
 	Event   struct {
-		EventType string `json:"event_type"` // 事件类型
+		EventType      string `json:"event_type"`      // 事件类型
+		OpenKFID       string `json:"open_kfid"`       // 客服账号ID
+		ExternalUserID string `json:"external_userid"` // 客户UserID
 	} `json:"event"` // 事件消息
 }
 
@@ -194,8 +196,6 @@ type SessionStatusChangeEvent struct {
 	} `json:"event"` // 事件消息
 }
 
-
-
 // GetOriginMessage 获取原始消息
 func (r *KfMessage) GetOriginMessage() (info []byte) {
 	return r.OriginData
@@ -205,7 +205,7 @@ func (r *KfMessage) GetTextMessage() (*Text, error) {
 	info := Text{}
 	err := json.Unmarshal(r.OriginData, &info)
 	if err != nil {
-		return nil, err
+		return &info, err
 	}
 	return &info, nil
 }
@@ -213,6 +213,21 @@ func (r *KfMessage) GetTextMessage() (*Text, error) {
 // GetEnterSessionEvent 用户进入会话事件
 func (r *KfMessage) GetEnterSessionEvent() (*EnterSessionEvent, error) {
 	info := EnterSessionEvent{}
+	err := json.Unmarshal(r.OriginData, &info)
+	if err != nil {
+		return &info, err
+	}
+	if info.OpenKFID == "" {
+		info.OpenKFID = info.Event.OpenKFID
+	}
+	if info.ExternalUserID == "" {
+		info.ExternalUserID = info.Event.ExternalUserID
+	}
+	return &info, err
+}
+
+func (r *KfMessage) GetBaseEvent() (*EventMessage, error) {
+	info := EventMessage{}
 	err := json.Unmarshal(r.OriginData, &info)
 	if err != nil {
 		return &info, err

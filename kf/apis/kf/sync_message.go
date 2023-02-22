@@ -3,28 +3,28 @@ package kf
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/fastwego/wxwork/corporation/type/type_message"
 	"github.com/fastwego/wxwork/kf"
+	"github.com/fastwego/wxwork/kf/type_kf"
 )
 
 const (
 	apiKfSyncMessage = "/cgi-bin/kf/sync_msg"
 )
 
-func SyncMessage(ctx *kf.KfApp, payload []byte) (*type_message.SyncMsgSchema, error) {
+func SyncMessage(ctx *kf.KfApp, payload []byte) (*type_kf.SyncMsgSchema, error) {
 	data, err := ctx.Client.HTTPPost(apiKfSyncMessage, bytes.NewReader(payload), "application/json;charset=utf-8")
 	if err != nil {
 		return nil, err
 	}
-	originInfo := type_message.SyncMsgSchemaRaw{}
+	originInfo := type_kf.SyncMsgSchemaRaw{}
 	if err = json.Unmarshal(data, &originInfo); err != nil {
 		return nil, err
 	}
 
-	msgList := make([]*type_message.KfMessage, 0)
+	msgList := make([]*type_kf.KfMessage, 0)
 	if len(originInfo.MsgList) > 0 {
 		for _, msg := range originInfo.MsgList {
-			newMsg := &type_message.KfMessage{}
+			newMsg := &type_kf.KfMessage{}
 			if val, ok := msg["msgid"].(string); ok {
 				newMsg.MsgID = val
 			}
@@ -59,7 +59,7 @@ func SyncMessage(ctx *kf.KfApp, payload []byte) (*type_message.SyncMsgSchema, er
 			msgList = append(msgList, newMsg)
 		}
 	}
-	return &type_message.SyncMsgSchema{
+	return &type_kf.SyncMsgSchema{
 		ErrCode:    originInfo.ErrCode,
 		ErrMsg:     originInfo.ErrMsg,
 		NextCursor: originInfo.NextCursor,
