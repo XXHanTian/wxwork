@@ -96,8 +96,9 @@ func (corporation *Corporation) NewApp(config AppConfig) (app *KfApp) {
 	instance := KfApp{
 		Config: config,
 		AccessToken: AccessToken{
-			Cache:                 file.New(os.TempDir()),
-			GetAccessTokenHandler: GetAccessToken,
+			Cache:                          file.New(os.TempDir()),
+			GetAccessTokenHandler:          GetAccessToken,
+			NoticeAccessTokenExpireHandler: NoticeAccessTokenExpire,
 		},
 		Corporation: corporation,
 	}

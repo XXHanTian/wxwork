@@ -56,7 +56,7 @@ func (client *Client) HTTPGet(uri string) (resp []byte, err error) {
 	return client.httpDo(req)
 }
 
-//HTTPPost POST 请求
+// HTTPPost POST 请求
 func (client *Client) HTTPPost(uri string, payload io.Reader, contentType string) (resp []byte, err error) {
 	newUrl, err := client.applyAccessToken(uri)
 	if err != nil {
@@ -73,7 +73,7 @@ func (client *Client) HTTPPost(uri string, payload io.Reader, contentType string
 	return client.httpDo(req)
 }
 
-//httpDo 执行 请求
+// httpDo 执行 请求
 func (client *Client) httpDo(req *http.Request) (resp []byte, err error) {
 	req.Header.Add("User-Agent", UserAgent)
 
@@ -233,7 +233,8 @@ func GetAccessToken(app *KfApp) (accessToken string, err error) {
 	}
 
 	d := time.Duration(expiresIn) * time.Second
-	_ = app.AccessToken.Cache.Save(cacheKey, accessToken, d)
+	// 提前 60 秒过期
+	_ = app.AccessToken.Cache.Save(cacheKey, accessToken, d-60*time.Second)
 
 	if app.Corporation.Logger != nil {
 		app.Corporation.Logger.Printf("%s %s %d\n", "refreshAccessTokenFromWXServer", accessToken, expiresIn)
