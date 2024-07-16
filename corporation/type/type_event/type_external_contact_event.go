@@ -16,7 +16,7 @@ package type_event
 
 type EventChangeExternalContact struct {
 	Event
-	ChangeType string
+	ChangeType string `xml:"ChangeType" json:"change_type"`
 }
 
 const (
@@ -156,16 +156,16 @@ type EventChangeExternalContactDelFollowUser struct {
 */
 type EventChangeExternalContactChangeExternalChat struct {
 	EventChangeExternalContact
-	ChatId        string             `xml:"ChatId"`
-	UpdateDetail  string             `xml:"UpdateDetail"`
-	JoinScene     string             `xml:"JoinScene"`
-	QuitScene     string             `xml:"QuitScene"`
-	MemChangeCnt  string             `xml:"MemChangeCnt"`
-	MemChangeList []MemberChangeItem `xml:"MemChangeList"`
-	LastMemVer    string             `xml:"LastMemVer"`
-	CurMemVer     string             `xml:"CurMemVer"`
+	ChatId        string             `xml:"ChatId" json:"chat_id"`
+	UpdateDetail  string             `xml:"UpdateDetail" json:"update_detail"`
+	JoinScene     string             `xml:"JoinScene" json:"join_scene"`
+	QuitScene     string             `xml:"QuitScene" json:"quit_scene"`
+	MemChangeCnt  string             `xml:"MemChangeCnt" json:"mem_change_cnt"`
+	MemChangeList []MemberChangeItem `xml:"MemChangeList" json:"mem_change_list"`
+	LastMemVer    string             `xml:"LastMemVer" json:"last_mem_ver"`
+	CurMemVer     string             `xml:"CurMemVer" json:"cur_mem_ver"`
 }
 
 type MemberChangeItem struct {
-	Item string `xml:"Item"`
+	Item string `xml:"Item" json:"item"`
 }

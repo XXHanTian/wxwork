@@ -23,12 +23,12 @@ const (
 )
 
 type Event struct {
-	XMLName      xml.Name `xml:"xml"`
-	ToUserName   string   `xml:"ToUserName"`
-	FromUserName string   `xml:"FromUserName"`
-	CreateTime   string   `xml:"CreateTime"`
-	MsgType      string   `xml:"MsgType"`
-	Event        string   `xml:"Event"`
+	XMLName      xml.Name `xml:"xml" json:"-"`
+	ToUserName   string   `xml:"ToUserName" json:"to_user_name"`
+	FromUserName string   `xml:"FromUserName" json:"from_user_name"`
+	CreateTime   string   `xml:"CreateTime" json:"create_time"`
+	MsgType      string   `xml:"MsgType" json:"msg_type"`
+	Event        string   `xml:"Event" json:"event"`
 }
 
 /*
