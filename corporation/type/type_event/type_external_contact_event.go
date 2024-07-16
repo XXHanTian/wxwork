@@ -29,18 +29,21 @@ const (
 	EventTypeChangeExternalContactChangeExternalChat     = "change_external_chat"      //客户群变更事件
 )
 
-/**
+/*
+*
 <xml>
-    <ToUserName><![CDATA[toUser]]></ToUserName>
-    <FromUserName><![CDATA[sys]]></FromUserName>
-    <CreateTime>1403610513</CreateTime>
-    <MsgType><![CDATA[event]]></MsgType>
-    <Event><![CDATA[change_external_contact]]></Event>
-    <ChangeType><![CDATA[add_external_contact]]></ChangeType>
-    <UserID><![CDATA[zhangsan]]></UserID>
-    <ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mAAAA]]></ExternalUserID>
-    <State><![CDATA[teststate]]></State>
-    <WelcomeCode><![CDATA[WELCOMECODE]]></WelcomeCode>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<FromUserName><![CDATA[sys]]></FromUserName>
+	<CreateTime>1403610513</CreateTime>
+	<MsgType><![CDATA[event]]></MsgType>
+	<Event><![CDATA[change_external_contact]]></Event>
+	<ChangeType><![CDATA[add_external_contact]]></ChangeType>
+	<UserID><![CDATA[zhangsan]]></UserID>
+	<ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mAAAA]]></ExternalUserID>
+	<State><![CDATA[teststate]]></State>
+	<WelcomeCode><![CDATA[WELCOMECODE]]></WelcomeCode>
+
 </xml>
 */
 type EventChangeExternalContactAddExternalContact struct {
@@ -51,17 +54,20 @@ type EventChangeExternalContactAddExternalContact struct {
 	WelcomeCode    string `xml:"WelcomeCode"`
 }
 
-/**
+/*
+*
 <xml>
-    <ToUserName><![CDATA[toUser]]></ToUserName>
-    <FromUserName><![CDATA[sys]]></FromUserName>
-    <CreateTime>1403610513</CreateTime>
-    <MsgType><![CDATA[event]]></MsgType>
-    <Event><![CDATA[change_external_contact]]></Event>
-    <ChangeType><![CDATA[edit_external_contact]]></ChangeType>
-    <UserID><![CDATA[zhangsan]]></UserID>
-    <ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mAAAA]]></ExternalUserID>
-    <State><![CDATA[teststate]]></State>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<FromUserName><![CDATA[sys]]></FromUserName>
+	<CreateTime>1403610513</CreateTime>
+	<MsgType><![CDATA[event]]></MsgType>
+	<Event><![CDATA[change_external_contact]]></Event>
+	<ChangeType><![CDATA[edit_external_contact]]></ChangeType>
+	<UserID><![CDATA[zhangsan]]></UserID>
+	<ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mAAAA]]></ExternalUserID>
+	<State><![CDATA[teststate]]></State>
+
 </xml>
 */
 type EventChangeExternalContactEditExternalContact struct {
@@ -71,17 +77,20 @@ type EventChangeExternalContactEditExternalContact struct {
 	State          string `xml:"State"`
 }
 
-/**
+/*
+*
 <xml>
-    <ToUserName><![CDATA[toUser]]></ToUserName>
-    <FromUserName><![CDATA[sys]]></FromUserName>
-    <CreateTime>1403610513</CreateTime>
-    <MsgType><![CDATA[event]]></MsgType>
-    <Event><![CDATA[change_external_contact]]></Event>
-    <ChangeType><![CDATA[edit_external_contact]]></ChangeType>
-    <UserID><![CDATA[zhangsan]]></UserID>
-    <ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mAAAA]]></ExternalUserID>
-    <State><![CDATA[teststate]]></State>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<FromUserName><![CDATA[sys]]></FromUserName>
+	<CreateTime>1403610513</CreateTime>
+	<MsgType><![CDATA[event]]></MsgType>
+	<Event><![CDATA[change_external_contact]]></Event>
+	<ChangeType><![CDATA[edit_external_contact]]></ChangeType>
+	<UserID><![CDATA[zhangsan]]></UserID>
+	<ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mAAAA]]></ExternalUserID>
+	<State><![CDATA[teststate]]></State>
+
 </xml>
 */
 type EventChangeExternalContactAddHalfExternalContact struct {
@@ -91,16 +100,19 @@ type EventChangeExternalContactAddHalfExternalContact struct {
 	State          string `xml:"State"`
 }
 
-/**
+/*
+*
 <xml>
-    <ToUserName><![CDATA[toUser]]></ToUserName>
-    <FromUserName><![CDATA[sys]]></FromUserName>
-    <CreateTime>1403610513</CreateTime>
-    <MsgType><![CDATA[event]]></MsgType>
-    <Event><![CDATA[change_external_contact]]></Event>
-    <ChangeType><![CDATA[del_external_contact]]></ChangeType>
-    <UserID><![CDATA[zhangsan]]></UserID>
-    <ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mACAAAA]]></ExternalUserID>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<FromUserName><![CDATA[sys]]></FromUserName>
+	<CreateTime>1403610513</CreateTime>
+	<MsgType><![CDATA[event]]></MsgType>
+	<Event><![CDATA[change_external_contact]]></Event>
+	<ChangeType><![CDATA[del_external_contact]]></ChangeType>
+	<UserID><![CDATA[zhangsan]]></UserID>
+	<ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mACAAAA]]></ExternalUserID>
+
 </xml>
 */
 type EventChangeExternalContactDelExternalContact struct {
@@ -111,14 +123,16 @@ type EventChangeExternalContactDelExternalContact struct {
 
 /*
 <xml>
-    <ToUserName><![CDATA[toUser]]></ToUserName>
-    <FromUserName><![CDATA[sys]]></FromUserName>
-    <CreateTime>1403610513</CreateTime>
-    <MsgType><![CDATA[event]]></MsgType>
-    <Event><![CDATA[change_external_contact]]></Event>
-    <ChangeType><![CDATA[del_follow_user]]></ChangeType>
-    <UserID><![CDATA[zhangsan]]></UserID>
-    <ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mACHAAA]]></ExternalUserID>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<FromUserName><![CDATA[sys]]></FromUserName>
+	<CreateTime>1403610513</CreateTime>
+	<MsgType><![CDATA[event]]></MsgType>
+	<Event><![CDATA[change_external_contact]]></Event>
+	<ChangeType><![CDATA[del_follow_user]]></ChangeType>
+	<UserID><![CDATA[zhangsan]]></UserID>
+	<ExternalUserID><![CDATA[woAJ2GCAAAXtWyujaWJHDDGi0mACHAAA]]></ExternalUserID>
+
 </xml>
 */
 type EventChangeExternalContactDelFollowUser struct {
@@ -127,17 +141,24 @@ type EventChangeExternalContactDelFollowUser struct {
 	ExternalUserID string `xml:"ExternalUserID"`
 }
 
-/**
+/*
+*
 <xml>
-    <ToUserName><![CDATA[toUser]]></ToUserName>
-    <FromUserName><![CDATA[sys]]></FromUserName>
-    <CreateTime>1403610513</CreateTime>
-    <MsgType><![CDATA[event]]></MsgType>
-    <Event><![CDATA[change_external_chat]]></Event>
-    <ChatId><![CDATA[CHAT_ID]]></ChatId>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<FromUserName><![CDATA[sys]]></FromUserName>
+	<CreateTime>1403610513</CreateTime>
+	<MsgType><![CDATA[event]]></MsgType>
+	<Event><![CDATA[change_external_chat]]></Event>
+	<ChatId><![CDATA[CHAT_ID]]></ChatId>
+
 </xml>
 */
 type EventChangeExternalContactChangeExternalChat struct {
 	EventChangeExternalContact
-	ChatId string `xml:"ChatId"`
+	ChatId       string `xml:"ChatId"`
+	UpdateDetail string `xml:"UpdateDetail"`
+	JoinScene    string `xml:"JoinScene"`
+	QuitScene    string `xml:"QuitScene"`
+	MemChangeCnt string `xml:"MemChangeCnt"`
 }

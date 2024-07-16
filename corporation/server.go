@@ -89,9 +89,11 @@ POST /api/callback?msg_signature=ASDFQWEXZCVAQFASDFASDFSS
 &nonce=123412323
 
 <xml>
-   <ToUserName><![CDATA[toUser]]></ToUserName>
-   <AgentID><![CDATA[toAgentID]]></AgentID>
-   <Encrypt><![CDATA[msg_encrypt]]></Encrypt>
+
+	<ToUserName><![CDATA[toUser]]></ToUserName>
+	<AgentID><![CDATA[toAgentID]]></AgentID>
+	<Encrypt><![CDATA[msg_encrypt]]></Encrypt>
+
 </xml>
 */
 func (s *Server) ParseXML(request *http.Request) (m interface{}, err error) {
@@ -307,6 +309,7 @@ func parseEvent(body []byte) (m interface{}, err error) {
 			return msg, nil
 		case eventtype.EventTypeChangeExternalContactChangeExternalChat:
 			msg := eventtype.EventChangeExternalContactChangeExternalChat{}
+			fmt.Printf("----> %v\n", string(body))
 			err = xml.Unmarshal(body, &msg)
 			if err != nil {
 				return
