@@ -156,9 +156,16 @@ type EventChangeExternalContactDelFollowUser struct {
 */
 type EventChangeExternalContactChangeExternalChat struct {
 	EventChangeExternalContact
-	ChatId       string `xml:"ChatId"`
-	UpdateDetail string `xml:"UpdateDetail"`
-	JoinScene    string `xml:"JoinScene"`
-	QuitScene    string `xml:"QuitScene"`
-	MemChangeCnt string `xml:"MemChangeCnt"`
+	ChatId        string             `xml:"ChatId"`
+	UpdateDetail  string             `xml:"UpdateDetail"`
+	JoinScene     string             `xml:"JoinScene"`
+	QuitScene     string             `xml:"QuitScene"`
+	MemChangeCnt  string             `xml:"MemChangeCnt"`
+	MemChangeList []MemberChangeItem `xml:"MemChangeList"`
+	LastMemVer    string             `xml:"LastMemVer"`
+	CurMemVer     string             `xml:"CurMemVer"`
+}
+
+type MemberChangeItem struct {
+	Item string `xml:"Item"`
 }

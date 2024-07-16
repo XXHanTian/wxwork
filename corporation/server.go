@@ -309,7 +309,6 @@ func parseEvent(body []byte) (m interface{}, err error) {
 			return msg, nil
 		case eventtype.EventTypeChangeExternalContactChangeExternalChat:
 			msg := eventtype.EventChangeExternalContactChangeExternalChat{}
-			fmt.Printf("----> %v\n", string(body))
 			err = xml.Unmarshal(body, &msg)
 			if err != nil {
 				return
