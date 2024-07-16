@@ -307,13 +307,6 @@ func parseEvent(body []byte) (m interface{}, err error) {
 				return
 			}
 			return msg, nil
-		case eventtype.EventTypeChangeExternalContactChangeExternalChat:
-			msg := eventtype.EventChangeExternalContactChangeExternalChat{}
-			err = xml.Unmarshal(body, &msg)
-			if err != nil {
-				return
-			}
-			return msg, nil
 		case eventtype.EventTypeChangeExternalContactDelExternalContact:
 			msg := eventtype.EventChangeExternalContactDelExternalContact{}
 			err = xml.Unmarshal(body, &msg)
@@ -336,6 +329,13 @@ func parseEvent(body []byte) (m interface{}, err error) {
 			}
 			return msg, nil
 		}
+	case eventtype.EventTypeChangeExternalContactChangeExternalChat:
+		msg := eventtype.EventChangeExternalContactChangeExternalChat{}
+		err = xml.Unmarshal(body, &msg)
+		if err != nil {
+			return
+		}
+		return msg, nil
 	case eventtype.EventTypeTaskCardClick:
 		msg := eventtype.EventTaskCardClick{}
 		err = xml.Unmarshal(body, &msg)
