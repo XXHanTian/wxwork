@@ -36,8 +36,6 @@ const (
 /*
 上传临时素材
 
-
-
 See: https://work.weixin.qq.com/api/doc/90000/90135/90253
 
 POST(@media) https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE
@@ -66,10 +64,26 @@ func Upload(ctx *corporation.App, media string, params url.Values) (resp []byte,
 	return ctx.Client.HTTPPost(apiUpload+"?"+params.Encode(), r, m.FormDataContentType())
 }
 
+func UploadFromReader(ctx *corporation.App, reader io.Reader, fileName string) (resp []byte, err error) {
+	r, w := io.Pipe()
+	m := multipart.NewWriter(w)
+	go func() {
+		defer w.Close()
+		defer m.Close()
+
+		part, err := m.CreateFormFile("media", fileName)
+		if err != nil {
+			return
+		}
+		if _, err = io.Copy(part, reader); err != nil {
+			return
+		}
+	}()
+	return ctx.Client.HTTPPost(apiUploadImg, r, m.FormDataContentType())
+}
+
 /*
 上传图片
-
-
 
 See: https://work.weixin.qq.com/api/doc/90000/90135/90256
 
@@ -102,8 +116,6 @@ func UploadImg(ctx *corporation.App, media string) (resp []byte, err error) {
 /*
 获取临时素材
 
-
-
 See: https://work.weixin.qq.com/api/doc/90000/90135/90254
 
 GET https://qyapi.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID
@@ -126,8 +138,6 @@ func Get(ctx *corporation.App, params url.Values, header http.Header) (resp *htt
 
 /*
 获取高清语音素材
-
-
 
 See: https://work.weixin.qq.com/api/doc/90000/90135/90255
 
