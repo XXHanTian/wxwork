@@ -1,13 +1,11 @@
 package type_event
 
-import "encoding/xml"
+const (
+	EventTypeKfMsgOrEvent = "kf_msg_or_event"
+)
 
 type KfEvent struct {
-	XMLName    xml.Name `xml:"xml"`
-	ToUserName string   `xml:"ToUserName"`
-	CreateTime int      `xml:"CreateTime"`
-	MsgType    string   `xml:"MsgType"`
-	Event      string   `xml:"Event"`
-	Token      string   `xml:"Token"`
-	OpenKfId   string   `xml:"OpenKfId"`
+	Event
+	Token    string `xml:"Token" json:"token"`
+	OpenKfId string `xml:"OpenKfId" json:"open_kf_id"`
 }

@@ -399,6 +399,14 @@ func parseEvent(body []byte) (m interface{}, err error) {
 			return
 		}
 		return msg, nil
+
+	case eventtype.EventTypeKfMsgOrEvent:
+		msg := eventtype.KfEvent{}
+		err = xml.Unmarshal(body, &msg)
+		if err != nil {
+			return
+		}
+		return msg, nil
 	}
 
 	return
