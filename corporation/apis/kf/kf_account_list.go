@@ -3,14 +3,15 @@ package kf
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/fastwego/wxwork/kf"
+
+	"github.com/fastwego/wxwork/corporation"
 )
 
 const (
 	apiKfAccountList = "/cgi-bin/kf/account/list"
 )
 
-func KfAccountList(ctx *kf.KfApp, offset, limit int64) ([]byte, error) {
+func KfAccountList(ctx *corporation.App, offset, limit int64) ([]byte, error) {
 	params := map[string]interface{}{
 		"offset": offset,
 		"limit":  limit,

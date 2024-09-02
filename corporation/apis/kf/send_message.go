@@ -3,15 +3,16 @@ package kf
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/fastwego/wxwork/kf"
-	"github.com/fastwego/wxwork/kf/type_kf"
+
+	"github.com/fastwego/wxwork/corporation"
+	"github.com/fastwego/wxwork/corporation/type/type_kf"
 )
 
 const (
 	apiSendMessage = "/cgi-bin/kf/send_msg"
 )
 
-func SendMessageText(ctx *kf.KfApp, toUser, openKfid string, content string) (*type_kf.SendMessageResp, error) {
+func SendMessageText(ctx *corporation.App, toUser, openKfid string, content string) (*type_kf.SendMessageResp, error) {
 	params := map[string]interface{}{
 		"touser":    toUser,
 		"open_kfid": openKfid,

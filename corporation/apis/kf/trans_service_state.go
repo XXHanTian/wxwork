@@ -3,15 +3,16 @@ package kf
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/fastwego/wxwork/kf"
-	"github.com/fastwego/wxwork/kf/type_kf"
+
+	"github.com/fastwego/wxwork/corporation"
+	"github.com/fastwego/wxwork/corporation/type/type_kf"
 )
 
 const (
 	apiTransServiceState = "/cgi-bin/kf/service_state/trans"
 )
 
-func TransServiceState(ctx *kf.KfApp, openKfid string, externalUserId string, serviceState int64, serviceUserId string) (*type_kf.TransferStateResp, error) {
+func TransServiceState(ctx *corporation.App, openKfid string, externalUserId string, serviceState int64, serviceUserId string) (*type_kf.TransferStateResp, error) {
 	params := map[string]interface{}{
 		"open_kfid":       openKfid,
 		"external_userid": externalUserId,
