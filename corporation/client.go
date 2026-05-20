@@ -227,7 +227,12 @@ func GetAccessToken(app *App) (accessToken string, err error) {
 		return
 	}
 
-	accessToken, expiresIn, err := refreshAccessTokenFromWXServer(app.Corporation.Config.Corpid, app.Config.Secret)
+	var expiresIn int
+	if app.TokenServerURL != "" {
+		accessToken, expiresIn, err = refreshAccessTokenFromTokenServer(app.TokenServerURL, app.Corporation.Config.Corpid, app.Config.Secret)
+	} else {
+		accessToken, expiresIn, err = refreshAccessTokenFromWXServer(app.Corporation.Config.Corpid, app.Config.Secret)
+	}
 	if err != nil {
 		return
 	}
@@ -236,7 +241,7 @@ func GetAccessToken(app *App) (accessToken string, err error) {
 	_ = app.AccessToken.Cache.Save(cacheKey, accessToken, d)
 
 	if app.Corporation.Logger != nil {
-		app.Corporation.Logger.Printf("%s %s %d\n", "refreshAccessTokenFromWXServer", accessToken, expiresIn)
+		app.Corporation.Logger.Printf("%s %s %d\n", "refreshAccessToken", accessToken, expiresIn)
 	}
 
 	return
@@ -262,6 +267,63 @@ func NoticeAccessTokenExpire(app *App) (err error) {
 
 See: https://developers.weixin.qq.com/doc/corporation/Basic_Information/Get_access_token.html
 */
+func refreshAccessTokenFromTokenServer(baseURL, corpid, secret string) (accessToken string, expiresIn int, err error) {
+	url := baseURL + "/api/wx_corp/token/refresh/"
+	reqBody, _ := json.Marshal(map[string]string{
+		"corpid":     corpid,
+		"corpsecret": secret,
+	})
+
+	req, err := http.NewRequest(http.MethodPost, url, strings.NewReader(string(reqBody)))
+	if err != nil {
+		return
+	}
+	req.Header.Add("Content-Type", "application/json")
+
+	response, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		err = fmt.Errorf("POST %s RETURN %s", url, response.Status)
+		return
+	}
+
+	resp, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return
+	}
+
+	var result = struct {
+		Code int `json:"code"`
+		Msg  string `json:"msg"`
+		Data struct {
+			AccessToken string `json:"access_token"`
+			ExpiresIn   int    `json:"expires_in"`
+		} `json:"data"`
+	}{}
+
+	err = json.Unmarshal(resp, &result)
+	if err != nil {
+		err = fmt.Errorf("Unmarshal error %s", string(resp))
+		return
+	}
+
+	if result.Code != 0 {
+		err = fmt.Errorf("%s", result.Msg)
+		return
+	}
+
+	if result.Data.AccessToken == "" {
+		err = fmt.Errorf("empty access_token")
+		return
+	}
+
+	return result.Data.AccessToken, result.Data.ExpiresIn, nil
+}
+
 func refreshAccessTokenFromWXServer(appid string, secret string) (accessToken string, expiresIn int, err error) {
 	params := url.Values{}
 	params.Add("corpid", appid)

@@ -52,11 +52,12 @@ type Config struct {
 应用
 */
 type App struct {
-	Config      AppConfig
-	AccessToken AccessToken
-	Client      Client
-	Server      Server
-	Corporation *Corporation
+	Config         AppConfig
+	AccessToken    AccessToken
+	Client         Client
+	Server         Server
+	Corporation    *Corporation
+	TokenServerURL string
 }
 
 /*
@@ -123,6 +124,10 @@ SetGetAccessTokenHandler 设置 AccessToken 获取方法。默认 从本地缓�
 */
 func (app *App) SetGetAccessTokenHandler(f GetAccessTokenFunc) {
 	app.AccessToken.GetAccessTokenHandler = f
+}
+
+func (app *App) SetTokenServerURL(url string) {
+	app.TokenServerURL = url
 }
 
 /*
